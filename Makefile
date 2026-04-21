@@ -21,5 +21,11 @@ clean:
 run:
 	python -m workflows.main
 
+run-vepc:
+	python -m workflows.vepc.main
+
 dev:
 	python -m workflows.main --debug
+
+dev-vepc:
+	python -m workflows.vepc.main

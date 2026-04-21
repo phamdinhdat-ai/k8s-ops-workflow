@@ -1,0 +1,142 @@
+# vEPC Configuration Templates
+
+# CLI Command Patterns
+cli_patterns:
+  show:
+    - "show {parameter}"
+    - "display {parameter}"
+    - "get {parameter}"
+
+  update:
+    - "set {parameter} {value}"
+    - "configure {parameter} {value}"
+    - "modify {parameter} {value}"
+
+# Risk Assessment Rules
+risk_levels:
+  critical:
+    keywords: ["shutdown", "disable", "delete", "remove", "reset"]
+    parameters: ["mme", "sgw", "pgw", "hss"]
+    description: "Operations that can cause service outage"
+
+  high:
+    keywords: ["restart", "reload", "clear"]
+    parameters: ["timer", "threshold", "capacity"]
+    description: "Operations that may impact active sessions"
+
+  medium:
+    keywords: ["modify", "change", "update"]
+    parameters: ["mcc", "mnc", "tai", "plmn"]
+    description: "Configuration changes with moderate impact"
+
+  low:
+    keywords: ["show", "display", "get", "list"]
+    parameters: []
+    description: "Read-only operations with no impact"
+
+# vEPC Parameters
+vepc_parameters:
+  network_identity:
+    - mcc  # Mobile Country Code
+    - mnc  # Mobile Network Code
+    - mme_code
+    - mme_gid
+    - tai  # Tracking Area Identity
+    - plmn  # Public Land Mobile Network
+
+  timers:
+    - t3412  # Periodic TAU timer
+    - t3402  # Attach retry timer
+    - t3410  # Paging timer
+    - t3422  # Detach timer
+    - t3450  # EMM timer
+    - t3460  # EMM timer
+    - t3470  # EMM timer
+
+  capacity:
+    - max_ue  # Maximum UE connections
+    - max_bearers
+    - max_sessions
+    - pool_size
+
+  features:
+    - csfb  # Circuit Switched Fallback
+    - srvcc  # Single Radio Voice Call Continuity
+    - volte  # Voice over LTE
+    - emergency_call
+    - roaming
+
+# Intent Classification Examples
+intent_examples:
+  show:
+    en:
+      - "Show me the current MCC and MNC"
+      - "Display MME configuration"
+      - "What is the T3412 timer value?"
+      - "List all active bearers"
+    vi:
+      - "Hiển thị MCC và MNC hiện tại"
+      - "Cho tôi xem cấu hình MME"
+      - "Giá trị timer T3412 là bao nhiêu?"
+
+  update:
+    en:
+      - "Change the MME code to 85"
+      - "Set timer T3412 to 60 minutes"
+      - "Update MNC to 01"
+      - "Modify the max UE to 10000"
+    vi:
+      - "Đổi MME code thành 85"
+      - "Đặt timer T3412 là 60 phút"
+      - "Cập nhật MNC thành 01"
+
+  explain:
+    en:
+      - "What does the T3412 timer do?"
+      - "Explain CSFB"
+      - "How does SRVCC work?"
+      - "What is a TAI?"
+    vi:
+      - "Timer T3412 dùng để làm gì?"
+      - "Giải thích CSFB"
+      - "SRVCC hoạt động như thế nào?"
+
+  troubleshoot:
+    en:
+      - "Attach is failing, how do I troubleshoot?"
+      - "UE cannot register, what should I check?"
+      - "High latency on S1 interface"
+    vi:
+      - "Attach bị lỗi, làm sao khắc phục?"
+      - "UE không đăng ký được, cần kiểm tra gì?"
+
+  general:
+    en:
+      - "Hello"
+      - "What can you help me with?"
+      - "Thank you"
+    vi:
+      - "Xin chào"
+      - "Bạn có thể giúp gì?"
+      - "Cảm ơn"
+
+# Response Templates
+response_templates:
+  cli_success:
+    en: "Here is the CLI command:\n\n```\n{cli_command}\n```\n\n{explanation}\n\n{risk_warning}"
+    vi: "Đây là lệnh CLI:\n\n```\n{cli_command}\n```\n\n{explanation}\n\n{risk_warning}"
+
+  validation_failed:
+    en: "The generated CLI command has syntax errors. Retrying..."
+    vi: "Lệnh CLI được tạo có lỗi cú pháp. Đang thử lại..."
+
+  risk_warning:
+    critical:
+      en: "⚠️ CRITICAL RISK: This operation can cause service outage. Please review carefully."
+      vi: "⚠️ RỦI RO CAO: Thao tác này có thể gây gián đoạn dịch vụ. Vui lòng xem xét kỹ."
+    high:
+      en: "⚠️ HIGH RISK: This operation may impact active sessions."
+      vi: "⚠️ RỦI RO CAO: Thao tác này có thể ảnh hưởng đến các phiên đang hoạt động."
+    medium:
+      en: "⚠️ MEDIUM RISK: Configuration change with moderate impact."
+      vi: "⚠️ RỦI RO TRUNG BÌNH: Thay đổi cấu hình có tác động vừa phải."

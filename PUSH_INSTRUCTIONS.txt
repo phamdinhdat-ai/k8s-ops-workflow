@@ -1,0 +1,19 @@
+# Instructions to Push to GitHub
+
+After creating the repository on GitHub, run these commands:
+
+# Add your GitHub repository as remote (replace YOUR_USERNAME)
+git remote add origin https://github.com/YOUR_USERNAME/k8s-ops-workflow.git
+
+# Push to GitHub
+git branch -M main
+git push -u origin main
+
+# If you need to authenticate, GitHub will prompt you for:
+# - Username: your GitHub username
+# - Password: use a Personal Access Token (not your password)
+
+# To create a Personal Access Token:
+# 1. Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+# 2. Generate new token with 'repo' scope
+# 3. Copy the token and use it as password when pushing
