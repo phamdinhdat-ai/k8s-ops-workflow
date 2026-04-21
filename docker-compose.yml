@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  k8s-ops-workflow:
+    build: .
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ANTHROPIC_BASE_URL=${ANTHROPIC_BASE_URL}
+      - DEFAULT_NAMESPACE=${DEFAULT_NAMESPACE:-default}
+      - DEFAULT_CLUSTER=${DEFAULT_CLUSTER:-production}
+    volumes:
+      - ./data:/app/data
+      - ~/.kube/config:/root/.kube/config:ro
+    command: python -m workflows.main

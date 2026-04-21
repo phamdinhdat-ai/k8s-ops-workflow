@@ -1,0 +1,47 @@
+# Report templates configuration
+
+health_summary:
+  sections:
+    - overview
+    - pod_status
+    - resource_usage
+    - recent_events
+  resources:
+    - pods
+    - deployments
+    - services
+    - events
+
+incident_summary:
+  sections:
+    - timeline
+    - impact
+    - root_cause
+    - remediation
+  resources:
+    - pods
+    - events
+    - logs
+
+capacity_overview:
+  sections:
+    - resource_usage
+    - hpa_status
+    - node_capacity
+    - recommendations
+  resources:
+    - pods
+    - nodes
+    - hpa
+    - pvc
+
+deployment_status:
+  sections:
+    - deployments
+    - rollout_history
+    - replica_status
+    - health_checks
+  resources:
+    - deployments
+    - replicasets
+    - pods
